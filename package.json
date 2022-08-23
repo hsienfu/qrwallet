@@ -1,0 +1,68 @@
+{
+  "name": "qrwallet",
+  "version": "1.0.0",
+  "description": "Solana QRCode Wallet",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=development electron-forge start",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src --delete-dir-on-start --out-dir build/src && cp index.html app.css build",
+    "package": "electron-forge package",
+    "make": "npm run build && electron-forge make",
+    "win32": "npm run build && electron-forge make --platform win32"
+  },
+  "author": "helloworld",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.18.10",
+    "@electron-forge/cli": "^6.0.0-beta.65",
+    "@electron-forge/maker-deb": "^6.0.0-beta.65",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.65",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.65",
+    "@electron-forge/maker-zip": "^6.0.0-beta.65",
+    "electron": "^20.0.3"
+  },
+  "dependencies": {
+    "@babel/core": "^7.18.13",
+    "@babel/preset-env": "^7.18.10",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/register": "^7.18.9",
+    "@solana/keypair.js": "file:solana-keypair.js",
+    "bs58": "^5.0.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-store": "^8.1.0",
+    "qr-scanner": "^1.4.1",
+    "qrcode": "^1.5.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sequelize": "^6.21.4",
+    "sqlite3": "^5.0.11"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "QRWallet"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
+}
